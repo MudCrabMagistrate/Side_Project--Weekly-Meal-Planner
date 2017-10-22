@@ -11,11 +11,12 @@ import java.util.*;
  */
 public class FileEdit extends FileHandler{
     
-    public Scanner scan = new Scanner(System.in);
-    public String userInput = "";
-    public String lowerConvert = "";
-    public String[][] mealsPerDay = new String [7][4];
-    public String [] mealType = new String[3];
+    Scanner scan = new Scanner(System.in);
+    String userInput = "";
+    String lowerConvert = "";
+    String[][] mealsPerDay = new String [7][4];
+    String [] mealType = new String[3];
+    String fileInput = null;
     
     
     public void DaySelect()
@@ -71,6 +72,7 @@ public class FileEdit extends FileHandler{
     {
         InitializeMealsPerDay();
         InitializeMealType();
+        
         for(int x = daySelect;x <= 6;x++)
         {
             System.out.println("==============================================");
@@ -83,6 +85,22 @@ public class FileEdit extends FileHandler{
             }
         }
     }
+    
+    public void DisplayMeals()
+    {
+        for(int x = 0; x<=6; x++)
+        {
+            System.out.println("\n==============================================");
+            System.out.println();
+            for(int y = 1; y <= 3; y++)
+            {
+                System.out.print(" | " + mealType[y-1] + ": " + mealsPerDay[x][y]);
+            }
+        }
+        System.out.println("\n==============================================");
+    }
+    
+    
     
     public void InitializeMealsPerDay()
     {      
@@ -109,17 +127,23 @@ public class FileEdit extends FileHandler{
         mealType[2] = "dinner";
     }
     
-    public void DisplayMeals()
+    public void PrepareFileInput()
     {
-        for(int x = 0; x<=6; x++)
+
+        for(int x = 0;x <= 6;x++)
         {
-            System.out.println("\n==============================================");
-            System.out.println("Day: " + mealsPerDay[x][0]);
-            for(int y = 1; y <= 3; y++)
+            fileInput = "==============================================\n";
+            fileInput += "Day: " + mealsPerDay[x][0];
+            for(int y = 1; y<=3; y++)
             {
-                System.out.print(" | " + mealType[y-1] + ": " + mealsPerDay[x][y]);
+                fileInput += "\n | " + mealType[y-1] + ": " + mealsPerDay[x][y];
             }
+            fileInput += "\n==============================================";
         }
-        System.out.println("\n==============================================");
+        System.out.println("fileInput: \n" + fileInput);
     }
+    
+
+    
+    
 }

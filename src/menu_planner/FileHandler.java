@@ -13,16 +13,21 @@ import java.time.format.DateTimeFormatter;
  */
 public class FileHandler extends Menu{
     
-    LocalDateTime now = LocalDateTime.now();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM.dd.uuuu-HH.mm.ss");
-    String dateAndTime = now.format(formatter);
+
     String filePath = "C:\\Users\\Derp_dot_2\\Desktop\\Programming\\Application - The Hub\\Menu_Planner\\MealPlanner_Output\\";
     
     
     public void New()
     {
         File newMenu = null;
+        
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM.dd.uuuu-HH.mm.ss");
+        String dateAndTime = now.format(formatter);
+        
         String newFileName = "Untitled-Menu_" + dateAndTime + ".txt";
+        
+        
         try
         {
             newMenu = new File(filePath + newFileName);
@@ -35,19 +40,50 @@ public class FileHandler extends Menu{
             e.printStackTrace();
         }
     }
-    public void Load()
+    
+    public void Load(String fileName)
     {
-        //C:\Users\Derp_dot_2\Desktop\Programming\Application - The Hub\Menu_Planner\MealPlanner_Output
-
         
+        try
+        {
+            FileReader load = new FileReader(filePath + fileName);
+            BufferedReader reader = new BufferedReader(load);
+            
+            String display = "";
+            
+                System.out.println("Reading...");
+            while((display = reader.readLine()) != null)
+            {
+                System.out.println(display);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }   
     }
     public void Edit()
     {
         FileEdit EditFile = new FileEdit();
         EditFile.DaySelect();
-        EditFile.DisplayMeals();  
+        EditFile.DisplayMeals();
+        EditFile.PrepareFileInput();
     }
-    public void ListPlannerFiles()
+
+    public void Save()
+    {
+        
+    }
+    
+    public void Close()
+    {
+        //Add function to close open file
+        Menu FileList = new Menu();
+        System.out.println("File closed.");
+        FileList.DisplayLoadMenu();
+    }
+    
+        public void ListPlannerFiles()
     {
         File file = null;
         String[] paths;
@@ -65,12 +101,4 @@ public class FileHandler extends Menu{
             e.printStackTrace();
         }
     }
-    public void Close()
-    {
-        //Add function to close open file
-        Menu FileList = new Menu();
-        System.out.println("File closed.");
-        FileList.DisplayLoadMenu();
-    }
-    
 }
