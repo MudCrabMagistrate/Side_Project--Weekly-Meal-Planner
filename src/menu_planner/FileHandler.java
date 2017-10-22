@@ -67,7 +67,10 @@ public class FileHandler extends Menu{
     }
     public void Close()
     {
-        
+        //Add function to close open file
+        Menu FileList = new Menu();
+        System.out.println("File closed.");
+        FileList.DisplayLoadMenu();
     }
     
 }
