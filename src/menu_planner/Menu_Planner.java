@@ -23,6 +23,7 @@ public class Menu_Planner {
         String userInput = "";
         String tempString = "";
         Menu.DisplayMainMenu();
+        
         while(!"stop".equals(userInput))
         {
         
@@ -35,12 +36,17 @@ public class Menu_Planner {
             case "new":
                 NewFile.New();
                 NewFile.Edit();
+                Menu.DisplayFileEditOptions();
+                userInput = scan.next();
+                tempString = userInput.toLowerCase();
+                userInput = tempString;
             break;
             case "load":
                 Menu.DisplayLoadMenu();
                 userInput = scan.next();
                 tempString = userInput.toLowerCase();
                 userInput = tempString;
+                NewFile.Load(userInput);
             break;
             case "close":
                 System.out.println("Closing Meal Planner.");
