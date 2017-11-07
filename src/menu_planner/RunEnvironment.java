@@ -1,63 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package menu_planner;
 
 import java.util.Scanner;
 
-/**
- *
- * @author Derp_dot_2
- */
 public class RunEnvironment {
-    
-public void MealPlanner()
-{
-     System.out.println("Loading...");
-        Scanner scan = new Scanner(System.in);
-        
-        Menu Menu = new Menu();
-        FileHandler NewFile = new FileHandler();
+    Scanner scan = new Scanner(System.in);
+    Menu menu = new Menu();
+    DataProcessing data = new DataProcessing();
+
+    public void MealPlanner(){
         String userInput = "";
-        String tempString = "";
-        Menu.DisplayMainMenu();
-        
-        while(!"stop".equals(userInput))
-        {
-        
-        userInput = "";
-        userInput = scan.next();
-        tempString = userInput.toLowerCase();
-        userInput = tempString;
-            switch(userInput)
-            {
+
+        while(!"stop".equals(userInput)){
+            menu.DisplayMainMenu();
+            
+            userInput = "";
+            data.ProcessInput(userInput = scan.next());
+            
+            switch(userInput){
             case "new":
-                NewFile.New();
-                NewFile.Edit();
-                Menu.DisplayFileEditOptions();
-                userInput = scan.next();
-                tempString = userInput.toLowerCase();
-                userInput = tempString;
+                data.CreateWeeklyMenu(userInput);
             break;
             case "load":
-                Menu.DisplayLoadMenu();
-                userInput = scan.next();
-                tempString = userInput.toLowerCase();
-                userInput = tempString;
-                NewFile.Load(userInput);
+                data.CreateWeeklyMenu(userInput);
             break;
             case "close":
-                System.out.println("Closing Meal Planner.");
-                System.exit(0);
+                userInput = "stop";
             break;
             default:
-            System.out.println("Error: not an option.");
+                System.out.println("Error: not an option.");
             break;
             }
-        Menu.DisplayMainMenu();//Disable in future.
         }
-        
-}
+    }
 }

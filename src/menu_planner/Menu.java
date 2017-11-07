@@ -1,19 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package menu_planner;
 
-/**
- *
- * @author Derp_dot_2
- */
 public class Menu{
+    FileProcessing Files = new FileProcessing();
     
-    
-    public void DisplayMainMenu()
-    {
+    public void DisplayMainMenu(){
         System.out.print("\n"+
         "=====Main Menu================================\n" +
         "     New\n" +
@@ -23,17 +13,14 @@ public class Menu{
         "  What would you like to do? >: ");
     }
     
-    public void DisplayLoadMenu()
-    {
-        FileHandler Files = new FileHandler();
+    public void DisplayLoadMenu(){
         System.out.println("=====Load File================================");
         Files.ListPlannerFiles();
         System.out.print("=============================================="
                 + "\nSelect File >: ");
     }
     
-    public void DisplayFileEditOptions()
-    {
+    public void DisplayFileEditOptions(){
         System.out.print("\n=====File Edit Options========================\n"
                          + "     Save Menu\n"
                          + "     Discard Changes\n"
@@ -41,5 +28,4 @@ public class Menu{
                          + "==============================================\n"
                          + "What would you like to do? >: ");      
     }
-    
 }
